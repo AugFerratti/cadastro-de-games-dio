@@ -8,6 +8,6 @@ namespace DIO.Games
 {
     public abstract class EntidadeBase
     {
-        private int Id { get; protected set; }
+        public int Id { get; protected set; }
     }
 }
