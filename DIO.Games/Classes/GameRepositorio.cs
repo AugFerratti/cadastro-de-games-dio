@@ -1,42 +1,40 @@
-﻿using System;
+﻿using DIO.Games.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DIO.Games.Interfaces;
 
 namespace DIO.Games
 {
     public class GameRepositorio : IRepositorio<Game>
     {
-        public void Atualiza(int id, Game entidade)
+        private List<Game> listaGame = new List<Game>();
+
+        public void Atualiza(int id, Game objeto)
         {
-            throw new NotImplementedException();
+            listaGame[id] = objeto;
         }
 
         public void Exclui(int id)
         {
-            throw new NotImplementedException();
+            listaGame[id].Excluir();
         }
 
-        public void Insere(Game entidade)
+        public void Insere(Game objeto)
         {
-            throw new NotImplementedException();
+            listaGame.Add(objeto);
         }
 
         public List<Game> Lista()
         {
-            throw new NotImplementedException();
+            return listaGame;
         }
 
         public int ProximoId()
         {
-            throw new NotImplementedException();
+            return listaGame.Count;
         }
 
         public Game RetornaPorId(int id)
         {
-            throw new NotImplementedException();
+            return listaGame[id];
         }
     }
 }
