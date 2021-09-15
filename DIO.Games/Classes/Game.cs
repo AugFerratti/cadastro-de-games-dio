@@ -8,7 +8,7 @@ namespace DIO.Games
         private string Titulo { get; set; }
         private string Descricao { get; set; }
         private int Ano { get; set; }
-        private bool Excluido { get; set; }
+        public bool Excluido { get; set; }
 
         public Game(int id, Genero genero, string titulo, string descricao, int ano)
         {
@@ -23,10 +23,11 @@ namespace DIO.Games
         public override string ToString()
         {
             string retorno = "";
-            retorno += "Gênero: " + this.Genero + Environment.NewLine;
-            retorno += "Título: " + this.Titulo + Environment.NewLine;
-            retorno += "Descrição: " + this.Descricao + Environment.NewLine;
-            retorno += "Ano de lançamento: " + this.Ano + Environment.NewLine;
+            retorno += "- Gênero: " + this.Genero + Environment.NewLine;
+            retorno += "- Título: " + this.Titulo + Environment.NewLine;
+            retorno += "- Descrição: " + this.Descricao + Environment.NewLine;
+            retorno += "- Ano de lançamento: " + this.Ano + Environment.NewLine;
+            retorno += "- Excluído: " + this.Excluido;
             return retorno;
         }
 
@@ -38,6 +39,11 @@ namespace DIO.Games
         public int retornaId()
         {
             return this.Id;
+        }
+
+        public bool retornaExcluido()
+        {
+            return this.Excluido;
         }
 
         public void Excluir()

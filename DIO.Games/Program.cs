@@ -31,15 +31,17 @@ namespace DIO.Games
                         ListarGames();
                         break;
                     case 3:
-
+                        VisualizarGame();
                         break;
                     case 4:
-
+                        AtualizarGame();
                         break;
                     case 5:
-
+                        ExcluirGame();
                         break;
                     case 6:
+                        Console.WriteLine("Obrigado por utilizar!");
+                        Console.WriteLine("Saindo...");
                         return;
                     default:
 
@@ -84,7 +86,7 @@ namespace DIO.Games
             static void ListarGames()
             {
                 Console.Clear();
-                Console.WriteLine("-> [2]. LISTAS GAMES");
+                Console.WriteLine("-> [2]. LISTAR GAMES");
                 Console.WriteLine();
                 var lista = repositorio.Lista();
 
@@ -99,8 +101,82 @@ namespace DIO.Games
 
                 foreach (var game in lista)
                 {
-                    Console.WriteLine("#ID {0}: - {1}", game.retornaId(), game.retornaTitulo());
+                    var excluido = game.retornaExcluido();
+                        Console.WriteLine("#ID {0}: - {1}{2}", game.retornaId(), game.retornaTitulo(), (excluido ? " **Excluído" : ""));
                 }
+                Console.WriteLine();
+                Console.WriteLine("Pressione [enter] para continuar...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+
+            static void VisualizarGame()
+            {
+                Console.Clear();
+                Console.WriteLine("-> [3]. VISUALIZAR GAME");
+                Console.WriteLine();
+                Console.Write("Digite o ID do game: ");
+                int indiceGame = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                var game = repositorio.RetornaPorId(indiceGame);
+
+                Console.WriteLine("Visualizando...");
+                Console.WriteLine(game);
+                Console.WriteLine();
+                Console.WriteLine("Pressione [enter] para continuar...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+
+            static void AtualizarGame()
+            {
+                Console.Clear();
+                Console.WriteLine("-> [4]. ATUALIZAR GAME");
+                Console.WriteLine();
+                Console.Write("Digite o ID do game: ");
+                int indiceGame = int.Parse(Console.ReadLine());
+
+                foreach (int i in Enum.GetValues(typeof(Genero)))
+                {
+                    Console.WriteLine("{0} - {1}", i, Enum.GetName(typeof(Genero), i));
+                }
+                Console.WriteLine();
+                Console.Write("-> Digite o gênero entre as opções acima: ");
+                int entradaGenero = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+                Console.Write("- Digite o nome do Game: ");
+                string entradaTitulo = Console.ReadLine();
+
+                Console.Write("- Digite a data de lançamento do Game: ");
+                int entradaAno = int.Parse(Console.ReadLine());
+
+                Console.Write("- Digite a descrição do Game: ");
+                string entradaDescricao = Console.ReadLine();
+
+                Game atualizaGame = new Game(id:indiceGame, genero: (Genero)entradaGenero, titulo: entradaTitulo, ano: entradaAno, descricao: entradaDescricao);
+
+                repositorio.Atualiza(indiceGame, atualizaGame);
+                Console.WriteLine();
+                Console.WriteLine("Game atualizado com sucesso!");
+                Console.WriteLine();
+                Console.WriteLine("Pressione [enter] para continuar...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+
+            static void ExcluirGame()
+            {
+                Console.Clear();
+                Console.WriteLine("-> [5]. EXCLUIR GAME");
+                Console.WriteLine();
+                Console.Write("Digite o ID do game: ");
+                int indiceGame = int.Parse(Console.ReadLine());
+
+                repositorio.Exclui(indiceGame);
+
+                Console.WriteLine();
+                Console.WriteLine("Game excluído com sucesso!");
                 Console.WriteLine();
                 Console.WriteLine("Pressione [enter] para continuar...");
                 Console.ReadKey();
